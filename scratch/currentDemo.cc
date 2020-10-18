@@ -29,8 +29,8 @@ main (int argc, char *argv[])
   uint32_t delay0 = 0;
   uint32_t delay1 = 0;
   CommandLine cmd (__FILE__);
-  cmd.AddValue ("delayA", "The delay for link between snda and rcv.", delay0);
-  cmd.AddValue ("delayB", "The delay for link between snda and rcv.", delay1);
+  cmd.AddValue ("delay0", "The delay for link between snda and rcv.", delay0);
+  cmd.AddValue ("delay1", "The delay for link between snda and rcv.", delay1);
   cmd.Parse (argc, argv);
 
   NodeContainer nodes;
