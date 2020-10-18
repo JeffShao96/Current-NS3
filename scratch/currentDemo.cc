@@ -26,11 +26,11 @@ main (int argc, char *argv[])
 
   Time::SetResolution (Time::MS);
 
-  uint32_t delayA = 0;
-  uint32_t delayB = 0;
+  uint32_t delay0 = 0;
+  uint32_t delay1 = 0;
   CommandLine cmd (__FILE__);
-  cmd.AddValue ("delayA", "The delay for link between snda and rcv.", delayA);
-  cmd.AddValue ("delayB", "The delay for link between snda and rcv.", delayB);
+  cmd.AddValue ("delayA", "The delay for link between snda and rcv.", delay0);
+  cmd.AddValue ("delayB", "The delay for link between snda and rcv.", delay1);
   cmd.Parse (argc, argv);
 
   NodeContainer nodes;
@@ -42,10 +42,10 @@ main (int argc, char *argv[])
 
   std::vector<PointToPointHelper> pointToPoint (2);
   pointToPoint[0].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
-  pointToPoint[0].SetChannelAttribute ("Delay", TimeValue (Time (delayA)));
+  pointToPoint[0].SetChannelAttribute ("Delay", TimeValue (Time (delay0)));
 
   pointToPoint[1].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
-  pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delayB)));
+  pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delay1)));
 
   std::vector<NetDeviceContainer> devices (2);
   devices[0] = pointToPoint[0].Install (nodeAdjacencyList[0]);
