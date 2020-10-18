@@ -1,15 +1,15 @@
 #!/bin/bash
-a=0
-b=0
+d0=0
+d1=0
 start_time=`date +%s`
 echo "Start running the scratch at $start_time_s">log.out
 start_time_s=`date`
-for a in {1..1000}
+for d0 in {1..1000}
 do
-    for b in {1..1000}
+    for d1 in {1..1000}
     do
-    echo "delayA is $a, delayB is $b"
-    ./waf --run "currentDemo --delayA=$a --delayB=$b"
+    echo "delayA is $d0, delayB is $d1"
+    ./waf --run "currentDemo --delayA=$d0 --delayB=$d1"
     done
 done
 end_time_s=`date`
