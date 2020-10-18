@@ -19,3 +19,12 @@ done
 
 
 The NS-3 script [currentDemo.cc](./scratch/currentDemo.cc) simulates the network according to the link delays specified in the arguments. 
+
+```cpp
+...
+pointToPoint[0].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
+pointToPoint[0].SetChannelAttribute ("Delay", TimeValue (Time (delay0)));
+pointToPoint[1].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
+pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delay1)));
+...
+```
