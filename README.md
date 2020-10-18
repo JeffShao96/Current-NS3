@@ -28,3 +28,12 @@ pointToPoint[1].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
 pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delay1)));
 ...
 ```
+
+In addition, we modify NS-3 file [udp-server.cc](./src/applications/model/udp-server.cc) to keep track of the packet arrival times and then calculate and print out the difference between the receiving time of two packages.
+
+## Demo
+You can repeat the demo by using following command:
+```bash
+./waf configure
+./repeatCurrentDemo.sh
+```
