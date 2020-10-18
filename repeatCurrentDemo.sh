@@ -8,8 +8,8 @@ for d0 in {1..1000}
 do
     for d1 in {1..1000}
     do
-    echo "delayA is $d0, delayB is $d1"
-    ./waf --run "currentDemo --delayA=$d0 --delayB=$d1"
+    echo "delay0 is $d0, delay1 is $d1"
+    ./waf --run "currentDemo --delay0=$d0 --delay1=$d1"
     done
 done
 end_time_s=`date`
