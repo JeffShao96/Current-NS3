@@ -187,10 +187,10 @@ UdpServer::HandleRead (Ptr<Socket> socket)
               m_rcvtime.push_back (m_temprcvtime);
               if(m_rcvtime.size()==2)
                 {
-                  std::pair<uint64_t, Time> firstp = m_rcvtime[0];
-                  std::pair<uint64_t, Time> secondp = m_rcvtime[1];
+                  std::pair<uint64_t, Time> secondp = m_rcvtime[0];
+                  std::pair<uint64_t, Time> firstp = m_rcvtime[1];
                   int diff;
-                  if (secondp.first > firstp.first)
+                  if (secondp.first < firstp.first)
                     {
                       diff = (secondp.second - firstp.second).GetTimeStep ();
                     }
