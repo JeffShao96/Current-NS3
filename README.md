@@ -18,7 +18,7 @@ You can run the brute force method using following command:
 ./waf configure
 ./repeatCurrentDemo.sh
 ```
-## Simulation Code
+## Exhaustive Testing Demo Code
 
 To find the range of the difference between the arrival times of two packets using the brute force method with the current NS-3, we write two scripts. The shell script [repeatCurrentDemo.sh](./repeatCurrentDemo.sh) enumerates all possible 1,000,000 combinations of the link delays, and runs an NS-3 simulation for each combination.
 
