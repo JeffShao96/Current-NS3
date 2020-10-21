@@ -5,9 +5,9 @@ This repository contains the necessary code to solve the following exhasutive te
 
 Exhaustive testing problem: Two senders and one receiver are connected by two point-to-point links. Both senders simultaneously send a UDP packet to the receiver. What is the range of all possible differences between the arrival times of these two packets if each link has an uncertain delay between 1 and 1000ms?
 
-We can use the brute force method with the current NS-3 to simulate all possible cases (a total of 1000*1000=1,000,000 cases). You can download the corresponding scripts and code in this repository (including [repeatCurrentDemo.sh](./repeatCurrentDemo.sh), [currentDemo.cc](./scratch/currentDemo.cc), and [udp-server.cc](./src/applications/model/udp-server.cc)). It takes a total of 521,900 seconds to run all 1,000,000 simulations, and the simulation result is presented and discussed in the [short paper](https://github.com/JeffShao96/Symbolic-NS3/blob/master/Sym_NS_3_Draft.pdf). 
+We can use the brute force method with the current NS-3 to simulate all possible cases (a total of 1000*1000=1,000,000 cases). You can download the corresponding scripts and code in this repository (including [repeatCurrentDemo.sh](./repeatCurrentDemo.sh), [currentDemo.cc](./scratch/currentDemo.cc), and [udp-server.cc](./src/applications/model/udp-server.cc)). It takes a total of 521,900 seconds to run all 1,000,000 simulations, and the simulation result is presented and discussed in the [short paper](https://cse.unl.edu/~xu/Sym_NS_3_Draft.pdf). 
 
-We propose a more efficient method using our proposed [Symbolic NS-3](https://github.com/JeffShao96/Symbolic-NS3). It takes only 33 seconds to get the simulation result using Symbolic NS-3, and the simulation result is presented and discussed in the [short paper](https://github.com/JeffShao96/Symbolic-NS3/blob/master/Sym_NS_3_Draft.pdf). 
+We propose a more efficient method using our proposed [Symbolic NS-3](https://github.com/JeffShao96/Symbolic-NS3). It takes only 33 seconds to get the simulation result using Symbolic NS-3, and the simulation result is presented and discussed in the [short paper](https://cse.unl.edu/~xu/Sym_NS_3_Draft.pdf). 
 
 Below is the instruction to run the brute force method. 
 
