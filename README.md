@@ -1,7 +1,7 @@
 # Solving an exhaustive testing problem using current NS-3
 
 
-This repository contains the necessary code to solve the following exhasutive testing problem using the current NS-3. You can find more information about the problem in this [short paper](https://docs.google.com/viewer?url=https://github.com/JeffShao96/Symbolic-NS3/blob/master/Sym_NS_3_Draft.pdf). 
+This repository contains the necessary code to solve the following exhasutive testing problem using the current NS-3. You can find more information about the problem in this [short paper](https://github.com/JeffShao96/Symbolic-NS3/blob/master/Sym_NS_3_Draft.pdf). 
 
 Exhaustive testing problem: Two senders and one receiver are connected by two point-to-point links. Both senders simultaneously send a UDP packet to the receiver. What is the range of all possible differences between the arrival times of these two packets if each link has an uncertain delay between 1 and 1000ms?
 
