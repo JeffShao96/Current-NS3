@@ -8,7 +8,6 @@
 #include "ns3/internet-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
-#include "ctime"
 
 //Network Topology
 //
@@ -23,15 +22,19 @@ NS_LOG_COMPONENT_DEFINE ("CurrentNS3ScriptExample");
 int
 main (int argc, char *argv[])
 {
-
   Time::SetResolution (Time::MS);
 
-  uint32_t delay0 = 0;
   uint32_t delay1 = 0;
+  uint32_t delay2 = 0;
   CommandLine cmd (__FILE__);
-  cmd.AddValue ("delay0", "The delay for link between snda and rcv.", delay0);
-  cmd.AddValue ("delay1", "The delay for link between snda and rcv.", delay1);
+  cmd.AddValue ("delay1", "The delay for link between snd1 and rcv.", delay1);
+  cmd.AddValue ("delay2", "The delay for link between snd2 and rcv.", delay2);
   cmd.Parse (argc, argv);
+
+
+  std::vector<PointToPointHelper> pointToPoint (2);
+  pointToPoint[0].SetChannelAttribute ("Delay", TimeValue (Time (delay1)));
+  pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delay2)));
 
   NodeContainer nodes;
   nodes.Create (3);
@@ -39,13 +42,6 @@ main (int argc, char *argv[])
   std::vector<NodeContainer> nodeAdjacencyList (2);
   nodeAdjacencyList[0] = NodeContainer (nodes.Get (0), nodes.Get (2));
   nodeAdjacencyList[1] = NodeContainer (nodes.Get (1), nodes.Get (2));
-
-  std::vector<PointToPointHelper> pointToPoint (2);
-  pointToPoint[0].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
-  pointToPoint[0].SetChannelAttribute ("Delay", TimeValue (Time (delay0)));
-
-  pointToPoint[1].SetDeviceAttribute ("DataRate", StringValue ("5Mbps"));
-  pointToPoint[1].SetChannelAttribute ("Delay", TimeValue (Time (delay1)));
 
   std::vector<NetDeviceContainer> devices (2);
   devices[0] = pointToPoint[0].Install (nodeAdjacencyList[0]);
@@ -64,31 +60,27 @@ main (int argc, char *argv[])
       interfaces[i] = address.Assign (devices[i]);
     }
 
-  UdpServerHelper server1 (2333);
+  UdpServerHelper server (2333);
 
-  ApplicationContainer rcv = server1.Install (nodes.Get (2));
+  ApplicationContainer rcv = server.Install (nodes.Get (2));
   rcv.Start (Seconds (1.0));
   rcv.Stop (Seconds (10.0));
 
-  UdpClientHelper client1 (interfaces[0].GetAddress (1), 2333);
-  client1.SetAttribute ("MaxPackets", UintegerValue (1));
-  client1.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
-  client1.SetAttribute ("PacketSize", UintegerValue (1024));
+  UdpClientHelper snd1 (interfaces[0].GetAddress (1), 2333);
+  snd1.SetAttribute ("MaxPackets", UintegerValue (1));
 
-  ApplicationContainer snda = client1.Install (nodes.Get (0));
-  snda.Start (Seconds (1.0));
-  snda.Stop (Seconds (10.0));
+  UdpClientHelper snd2 (interfaces[1].GetAddress (1), 2333);
+  snd2.SetAttribute ("MaxPackets", UintegerValue (1));
 
-  UdpClientHelper client2 (interfaces[1].GetAddress (1), 2333);
-  client2.SetAttribute ("MaxPackets", UintegerValue (1));
-  client2.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
-  client2.SetAttribute ("PacketSize", UintegerValue (1024));
-
-  ApplicationContainer sndb = client2.Install (nodes.Get (1));
-  sndb.Start (Seconds (1.0));
-  sndb.Stop (Seconds (10.0));
+  ApplicationContainer snd;
+  snd.Add(snd1.Install (nodes.Get (0)));
+  snd.Add(snd2.Install (nodes.Get (1)));
+  snd.Start (Seconds (1.0));
+  snd.Stop (Seconds (10.0));
 
   Simulator::Run ();
+  Time Diff = Time(delay1)-Time(delay2);
+  std::cout<<"Diff is "<<Diff<<std::endl;
   Simulator::Destroy ();
   return 0;
 }
